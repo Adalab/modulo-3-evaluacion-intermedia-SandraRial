@@ -1,12 +1,33 @@
 import '../styles/App.scss';
+import phrasesList from '../data/quotes.json';
+import { useState } from 'react';
 // import callToApi from '../services/api';
-// import { useEffect, useState } from 'react';
+
 // import ls from '../services/localStorage';
 
 function App() {
+  const [data, setData] = useState(phrasesList);
+
+  const htmlData = data.map((phrase, i) => {
+    return (
+      <li key={i}>
+        <p>
+          {phrase.quote}
+          {phrase.character}
+        </p>
+      </li>
+    );
+  });
+
   return (
     <div>
-      <h1>Hola mundo</h1>
+      <header>
+        <h1>Frases de Friends</h1>
+      </header>
+      <main>
+        {/* list of phrases */}
+        <ul>{htmlData}</ul>
+      </main>
     </div>
   );
 }
