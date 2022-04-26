@@ -8,6 +8,7 @@ import { useState } from 'react';
 function App() {
   const [data, setData] = useState(phrasesList);
   const [phraseFilter, setPhraseFilter] = useState('');
+  const [characterFilter, setCharacterFilter] = useState('');
   const [newPhrase, setNewPhrase] = useState({
     quote: '',
     character: '',
@@ -24,6 +25,10 @@ function App() {
     });
   };
 
+  const handleSearchCharacter = (ev) => {
+    setCharacterFilter(ev.target.value);
+  };
+
   const handleClick = (ev) => {
     ev.preventDefault();
     setData([...data, newPhrase]);
@@ -34,10 +39,14 @@ function App() {
   };
 
   const htmlData = data
-    .filter((phrase) =>
-      phrase.quote
-        .toLocaleLowerCase()
-        .includes(phraseFilter.toLocaleLowerCase())
+    .filter(
+      (phrase) =>
+        phrase.quote
+          .toLocaleLowerCase()
+          .includes(phraseFilter.toLocaleLowerCase()) &&
+        characterFilter
+          .toLocaleLowerCase()
+          .includes(phrase.character.toLocaleLowerCase())
     )
 
     .map((phrase, i) => {
@@ -59,7 +68,8 @@ function App() {
       <main>
         <nav>
           <form action="">
-            <label htmlFor="phraseFilter">Filtrar por frase</label>
+            {/* phrase filter */}
+            <label htmlFor="phraseFilter">Filtrar por frase: </label>
             <input
               type="search"
               name="phraseFilter"
@@ -67,7 +77,25 @@ function App() {
               value={phraseFilter}
               onChange={handleSearch}
             />
-            <label htmlFor="characterFilter"></label>
+            {/* character filter */}
+            <label htmlFor="characterFilter">Filtrar por personaje: </label>
+            <select
+              type="search"
+              name="characterFilter"
+              id="characterFilter"
+              value={characterFilter}
+              onChange={handleSearchCharacter}
+            >
+              <option value="ross, monica, joey, phoebe, chandler, rachel">
+                Todos
+              </option>
+              <option value="ross">Ross</option>
+              <option value="monica">Monica</option>
+              <option value="joey">Joey</option>
+              <option value="phoebe">Phoebe</option>
+              <option value="chandler">Chandler</option>
+              <option value="rachel">Rachel</option>
+            </select>
           </form>
         </nav>
         {/* list of phrases */}
