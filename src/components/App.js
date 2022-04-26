@@ -7,10 +7,15 @@ import { useState } from 'react';
 
 function App() {
   const [data, setData] = useState(phrasesList);
+  const [phraseFilter, setPhraseFilter] = useState('');
   const [newPhrase, setNewPhrase] = useState({
     quote: '',
     character: '',
   });
+
+  const handleSearch = (ev) => {
+    setPhraseFilter(ev.target.value);
+  };
 
   const handleNewPhrase = (ev) => {
     setNewPhrase({
@@ -28,16 +33,23 @@ function App() {
     });
   };
 
-  const htmlData = data.map((phrase, i) => {
-    return (
-      <li key={i}>
-        <p>
-          {phrase.quote}
-          {phrase.character}
-        </p>
-      </li>
-    );
-  });
+  const htmlData = data
+    .filter((phrase) =>
+      phrase.quote
+        .toLocaleLowerCase()
+        .includes(phraseFilter.toLocaleLowerCase())
+    )
+
+    .map((phrase, i) => {
+      return (
+        <li key={i}>
+          <p>
+            {phrase.quote}
+            {phrase.character}
+          </p>
+        </li>
+      );
+    });
 
   return (
     <div>
@@ -45,6 +57,19 @@ function App() {
         <h1>Frases de Friends</h1>
       </header>
       <main>
+        <nav>
+          <form action="">
+            <label htmlFor="phraseFilter">Filtrar por frase</label>
+            <input
+              type="search"
+              name="phraseFilter"
+              id="phraseFilter"
+              value={phraseFilter}
+              onChange={handleSearch}
+            />
+            <label htmlFor="characterFilter"></label>
+          </form>
+        </nav>
         {/* list of phrases */}
         <ul>{htmlData}</ul>
         {/* add new phrase */}
