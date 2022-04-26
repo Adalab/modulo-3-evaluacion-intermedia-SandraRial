@@ -39,15 +39,15 @@ function App() {
   };
 
   const htmlData = data
-    // .filter(
-    //   (phrase) =>
-    //     phrase.quote
-    //       .toLocaleLowerCase()
-    //       .includes(phraseFilter.toLocaleLowerCase())
-    //     characterFilter
-    //       .toLocaleLowerCase()
-    //       .includes(phrase.character.toLocaleLowerCase())
-    // )
+    .filter(
+      (phrase) =>
+        phrase.quote
+          .toLocaleLowerCase()
+          .includes(phraseFilter.toLocaleLowerCase())
+      //     characterFilter
+      //       .toLocaleLowerCase()
+      //       .includes(phrase.character.toLocaleLowerCase())
+    )
 
     // (characterFilter === 'all' ||
     //     phrase.character
