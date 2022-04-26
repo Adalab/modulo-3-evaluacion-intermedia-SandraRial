@@ -39,15 +39,20 @@ function App() {
   };
 
   const htmlData = data
-    .filter(
-      (phrase) =>
-        phrase.quote
-          .toLocaleLowerCase()
-          .includes(phraseFilter.toLocaleLowerCase()) &&
-        characterFilter
-          .toLocaleLowerCase()
-          .includes(phrase.character.toLocaleLowerCase())
-    )
+    // .filter(
+    //   (phrase) =>
+    //     phrase.quote
+    //       .toLocaleLowerCase()
+    //       .includes(phraseFilter.toLocaleLowerCase())
+    //     characterFilter
+    //       .toLocaleLowerCase()
+    //       .includes(phrase.character.toLocaleLowerCase())
+    // )
+
+    // (characterFilter === 'all' ||
+    //     phrase.character
+    //       .toLocaleLowerCase()
+    //       .includes(characterFilter.toLocaleLowerCase()))
 
     .map((phrase, i) => {
       return (
@@ -67,7 +72,7 @@ function App() {
       </header>
       <main>
         <nav>
-          <form action="">
+          <form action="submit">
             {/* phrase filter */}
             <label htmlFor="phraseFilter">Filtrar por frase: </label>
             <input
@@ -86,9 +91,7 @@ function App() {
               value={characterFilter}
               onChange={handleSearchCharacter}
             >
-              <option value="ross, monica, joey, phoebe, chandler, rachel">
-                Todos
-              </option>
+              <option value="all">Todos</option>
               <option value="ross">Ross</option>
               <option value="monica">Monica</option>
               <option value="joey">Joey</option>
@@ -101,7 +104,7 @@ function App() {
         {/* list of phrases */}
         <ul>{htmlData}</ul>
         {/* add new phrase */}
-        <form action="">
+        <form action="submit">
           <h2>Añadir una nueva frase</h2>
           <label htmlFor="quote">Frase</label>
           <input
