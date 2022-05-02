@@ -39,13 +39,15 @@ function App() {
 
   const handleClick = (ev) => {
     ev.preventDefault();
-    setData([...data, newPhrase]);
-    setNewPhrase({
-      quote: '',
-      character: '',
-    });
-    // const addPhrase = [...data, newPhrase];
-    // setData(addPhrase);
+    if (newPhrase.quote === '' || newPhrase.character === '') {
+      alert('Rellena todos los campos');
+    } else {
+      setData([...data, newPhrase]);
+      setNewPhrase({
+        quote: '',
+        character: '',
+      });
+    }
   };
 
   const htmlData = data
