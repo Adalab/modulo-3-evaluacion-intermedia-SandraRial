@@ -1,8 +1,6 @@
 import '../styles/App.scss';
-//import phrasesList from '../data/quotes.json';
 import getDataApi from '../services/api';
 import { useEffect, useState } from 'react';
-//import ls from '../services/localStorage';
 
 function App() {
   const [data, setData] = useState([]);
