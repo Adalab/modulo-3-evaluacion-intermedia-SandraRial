@@ -65,9 +65,9 @@ function App() {
 
     .map((phrase, i) => {
       return (
-        <li key={i}>
+        <li key={i} className="list__liItem">
           <p>
-            {phrase.quote}-{phrase.character}
+            {phrase.quote}~{phrase.character}
           </p>
         </li>
       );
@@ -76,65 +76,76 @@ function App() {
   return (
     <div>
       <header>
-        <h1>Frases de Friends</h1>
+        <h1 className="title"> ~ Frases de Friends ~</h1>
       </header>
       <main>
         <nav>
-          <form action="submit">
-            {/* phrase filter */}
-            <label htmlFor="phraseFilter">Filtrar por frase: </label>
-            <input
-              type="search"
-              name="phraseFilter"
-              id="phraseFilter"
-              value={phraseFilter}
-              onChange={handleSearch}
-            />
-            {/* character filter */}
-            <label htmlFor="characterFilter">Filtrar por personaje: </label>
-            <select
-              type="search"
-              name="characterFilter"
-              id="characterFilter"
-              value={characterFilter}
-              onChange={handleSearchCharacter}
-            >
-              <option value="all">Todos</option>
-              <option value="Ross">Ross</option>
-              <option value="Monica">Monica</option>
-              <option value="Joey">Joey</option>
-              <option value="Phoebe">Phoebe</option>
-              <option value="Chandler">Chandler</option>
-              <option value="Rachel">Rachel</option>
-            </select>
+          <form action="submit" className="nav">
+            <div className="nav__flPhrase">
+              {/* phrase filter */}
+              <label htmlFor="phraseFilter">Filtrar por frase: </label>
+              <input
+                type="search"
+                name="phraseFilter"
+                id="phraseFilter"
+                value={phraseFilter}
+                onChange={handleSearch}
+              />
+            </div>
+            <div className="nav__flCharacter">
+              {/* character filter */}
+              <label htmlFor="characterFilter">Filtrar por personaje: </label>
+              <select
+                type="search"
+                name="characterFilter"
+                id="characterFilter"
+                value={characterFilter}
+                onChange={handleSearchCharacter}
+              >
+                <option value="all">Todos</option>
+                <option value="Ross">Ross</option>
+                <option value="Monica">Monica</option>
+                <option value="Joey">Joey</option>
+                <option value="Phoebe">Phoebe</option>
+                <option value="Chandler">Chandler</option>
+                <option value="Rachel">Rachel</option>
+              </select>
+            </div>
           </form>
         </nav>
         {/* list of phrases */}
-        <ul>{htmlData}</ul>
+        <ul className="list">{htmlData}</ul>
         {/* add new phrase */}
         <form action="submit">
-          <h2>Añadir una nueva frase</h2>
-          <label htmlFor="quote">Frase</label>
-          <input
-            type="text"
-            name="quote"
-            id="quote"
-            value={newPhrase.quote}
-            onChange={handleNewPhrase}
-          />
-          <label htmlFor="character">Personaje</label>
-          <input
-            type="text"
-            name="character"
-            id="character"
-            value={newPhrase.character}
-            onChange={handleNewPhrase}
-          />
-          <input
-            type="submit"
-            value="Añadir una nueva frase"
-            onClick={handleClick}
-          />
+          <h2 className="title_2">~ Añadir una nueva frase ~</h2>
+          <div className="add">
+            <div className="add__phrase">
+              <label htmlFor="quote">Frase: </label>
+              <input
+                type="text"
+                name="quote"
+                id="quote"
+                value={newPhrase.quote}
+                onChange={handleNewPhrase}
+              />
+            </div>
+            <div className="add__character">
+              <label htmlFor="character">Personaje: </label>
+              <input
+                type="text"
+                name="character"
+                id="character"
+                value={newPhrase.character}
+                onChange={handleNewPhrase}
+              />
+              <input
+                className="add__btn"
+                type="submit"
+                value="Añadir una nueva frase"
+                onClick={handleClick}
+              />
+            </div>
+          </div>
         </form>
       </main>
     </div>

@@ -1,1 +1,70 @@
+.title {
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+   &__flPhrase {
+       margin-right: 10px;
+       text-decoration: solid;
+       font-style: italic;
+   }
+   &__flCharacter {
+       margin-left: 10px;
+       text-decoration: solid;
+       font-style: italic;
+   }
+}
+
+.list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    &__liItem {
+        list-style: none;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-radius: 0.8rem;
+        border: 0.5px solid red;
+        margin: 5px;
+        padding: 5px;
+        width: 30rem;
+    }
+}
+
+.title_2 {
+    display: flex;
+    justify-content: center;
+    font-style: italic;
+    margin: 30px;
+}
+.add {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 10px;
+    padding: 10px;
+    &__phrase {
+        margin-right: 10px;
+        font-style: italic;
+    }
+    &__character {
+        margin-left: 10px;
+        font-style: italic;
+        gap: 20px;
+    }
+    &__btn{
+        border-radius: 0.5rem;
+        font-style: italic;
+        border: lightgreen solid 0.1rem;
+        background-color: lightyellow;
+        margin-left: 10px;
+    }
+}
 
