@@ -1,18 +1,25 @@
 import '../styles/App.scss';
-import phrasesList from '../data/quotes.json';
-import { useState } from 'react';
-// import callToApi from '../services/api';
-
-// import ls from '../services/localStorage';
+//import phrasesList from '../data/quotes.json';
+import getDataApi from '../services/api';
+import { useEffect, useState } from 'react';
+import ls from '../services/localStorage';
 
 function App() {
-  const [data, setData] = useState(phrasesList);
+  const [data, setData] = useState([]);
   const [phraseFilter, setPhraseFilter] = useState('');
-  const [characterFilter, setCharacterFilter] = useState('');
+  const [characterFilter, setCharacterFilter] = useState('all');
   const [newPhrase, setNewPhrase] = useState({
     quote: '',
     character: '',
   });
+
+  useEffect(() => {
+    if (data.length === 0) {
+      getDataApi().then((datafromAPI) => {
+        setData(datafromAPI);
+      });
+    }
+  }, []);
 
   const handleSearch = (ev) => {
     setPhraseFilter(ev.target.value);
@@ -27,39 +34,35 @@ function App() {
 
   const handleSearchCharacter = (ev) => {
     setCharacterFilter(ev.target.value);
+    console.log(characterFilter);
   };
 
   const handleClick = (ev) => {
     ev.preventDefault();
-    setData([...data, newPhrase]);
-    setNewPhrase({
-      quote: '',
-      character: '',
-    });
+    const addPhrase = [...data, newPhrase];
+    setData(addPhrase);
   };
 
   const htmlData = data
-    .filter(
-      (phrase) =>
-        phrase.quote
-          .toLocaleLowerCase()
-          .includes(phraseFilter.toLocaleLowerCase())
-      //     characterFilter
-      //       .toLocaleLowerCase()
-      //       .includes(phrase.character.toLocaleLowerCase())
-    )
+    .filter((phrase) => {
+      if (characterFilter === 'all') {
+        return true;
+      } else if (characterFilter === phrase.character) {
+        return true;
+      } else {
+        return false;
+      }
+    })
 
-    // (characterFilter === 'all' ||
-    //     phrase.character
-    //       .toLocaleLowerCase()
-    //       .includes(characterFilter.toLocaleLowerCase()))
+    .filter((phrase) =>
+      phrase.quote.toLowerCase().includes(phraseFilter.toLowerCase())
+    )
 
     .map((phrase, i) => {
       return (
         <li key={i}>
           <p>
-            {phrase.quote}
-            {phrase.character}
+            {phrase.quote}-{phrase.character}
           </p>
         </li>
       );
@@ -92,12 +95,12 @@ function App() {
               onChange={handleSearchCharacter}
             >
               <option value="all">Todos</option>
-              <option value="ross">Ross</option>
-              <option value="monica">Monica</option>
-              <option value="joey">Joey</option>
-              <option value="phoebe">Phoebe</option>
-              <option value="chandler">Chandler</option>
-              <option value="rachel">Rachel</option>
+              <option value="Ross">Ross</option>
+              <option value="Monica">Monica</option>
+              <option value="Joey">Joey</option>
+              <option value="Phoebe">Phoebe</option>
+              <option value="Chandler">Chandler</option>
+              <option value="Rachel">Rachel</option>
             </select>
           </form>
         </nav>
