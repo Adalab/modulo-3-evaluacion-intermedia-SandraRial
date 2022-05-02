@@ -2,7 +2,7 @@ import '../styles/App.scss';
 //import phrasesList from '../data/quotes.json';
 import getDataApi from '../services/api';
 import { useEffect, useState } from 'react';
-import ls from '../services/localStorage';
+//import ls from '../services/localStorage';
 
 function App() {
   const [data, setData] = useState([]);
@@ -19,7 +19,7 @@ function App() {
         setData(datafromAPI);
       });
     }
-  }, []);
+  }, [data]);
 
   const handleSearch = (ev) => {
     setPhraseFilter(ev.target.value);
@@ -39,8 +39,13 @@ function App() {
 
   const handleClick = (ev) => {
     ev.preventDefault();
-    const addPhrase = [...data, newPhrase];
-    setData(addPhrase);
+    setData([...data, newPhrase]);
+    setNewPhrase({
+      quote: '',
+      character: '',
+    });
+    // const addPhrase = [...data, newPhrase];
+    // setData(addPhrase);
   };
 
   const htmlData = data
